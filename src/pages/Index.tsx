@@ -44,22 +44,11 @@ const Index = () => (
           height={1080}
           className="hero-resin-base w-full h-full object-cover"
         />
-        <img
-          src={heroImage}
-          alt=""
-          aria-hidden="true"
-          width={1920}
-          height={1080}
-          className="hero-resin-motion w-full h-full object-cover"
-        />
-        <img
-          src={heroImage}
-          alt=""
-          aria-hidden="true"
-          width={1920}
-          height={1080}
-          className="hero-resin-shimmer w-full h-full object-cover"
-        />
+        <div aria-hidden="true" className="hero-resin-pour" />
+        <div aria-hidden="true" className="hero-resin-stream-glow" />
+        <div aria-hidden="true" className="hero-resin-puddle-glow" />
+        <div aria-hidden="true" className="hero-resin-ripple" />
+        <div aria-hidden="true" className="hero-resin-spark" />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
       </div>
       <div className="container relative z-10 py-20">
