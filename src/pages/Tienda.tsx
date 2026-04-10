@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Search, SlidersHorizontal, X } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
@@ -196,7 +196,7 @@ const Tienda = () => {
               </div>
 
               <Button asChild className="mt-6 w-full bg-gradient-gold text-primary-foreground hover:opacity-90">
-                <a href="/contacto">Solicitar ayuda tecnica</a>
+                <Link to="/contacto">Solicitar ayuda tecnica</Link>
               </Button>
             </aside>
 
