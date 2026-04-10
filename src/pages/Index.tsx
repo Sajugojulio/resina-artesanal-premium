@@ -32,28 +32,13 @@ const testimonials = [
   { name: "Miguel Á.", role: "Artista de resina", text: "Los pigmentos metálicos y la resina cristal son simplemente perfectos para mis obras. Transparencia total y colores vibrantes.", rating: 5 },
 ];
 
-const heroVideo = `${import.meta.env.BASE_URL}hero-resin-pour.mp4`;
-
 const Index = () => (
   <Layout>
     {/* Hero */}
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       <div className="absolute inset-0">
-        <video
-          className="w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster={heroImage}
-          aria-hidden="true"
-        >
-          <source src={heroVideo} type="video/mp4" />
-        </video>
-        <img src={heroImage} alt="Resina epoxi decorativa - IDP Productos" width={1920} height={1080} className="sr-only" />
+        <img src={heroImage} alt="Resina epoxi decorativa - IDP Productos" width={1920} height={1080} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
-        <div className="absolute inset-0 bg-background/10" />
       </div>
       <div className="container relative z-10 py-20">
         <div className="max-w-2xl">
