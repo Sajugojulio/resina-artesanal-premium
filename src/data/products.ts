@@ -15,6 +15,9 @@ export interface Product {
   featured?: boolean;
 }
 
+const baseUrl = import.meta.env.BASE_URL;
+const asset = (path: string) => `${baseUrl}${path}`;
+
 export const categories = [
   { name: "Resina Epoxi", slug: "resina-epoxi" },
   { name: "Revestimientos Epoxicos", slug: "revestimientos-epoxicos" },
@@ -34,7 +37,7 @@ export const products: Product[] = [
     category: "Resina Epoxi",
     categorySlug: "resina-epoxi",
     price: 89.9,
-    image: "/epoxy-products.jpg",
+    image: asset("epoxy-products.jpg"),
     shortDescription: "Resina epoxi transparente de alta definicion para vertidos decorativos y acabados cristalinos.",
     description:
       "Formulada para ofrecer transparencia, nivelacion uniforme y una gran estabilidad visual, esta resina epoxi decorativa es ideal para piezas premium, encapsulados y trabajos donde el acabado final marca la diferencia. Ofrece una mezcla estable, brillo profundo y un excelente comportamiento en interiores.",
@@ -56,7 +59,7 @@ export const products: Product[] = [
     category: "Revestimientos Epoxicos",
     categorySlug: "revestimientos-epoxicos",
     price: 149,
-    image: "/epoxy-floor.jpg",
+    image: asset("epoxy-floor.jpg"),
     shortDescription: "Sistema epoxico de alto rendimiento para pavimentos industriales y zonas de trafico intenso.",
     description:
       "Pensado para entornos tecnicos y exigentes, este revestimiento epoxico aporta resistencia mecanica, limpieza sencilla y larga vida util. Es una solucion profesional para suelos industriales, talleres, almacenes y superficies que necesitan continuidad y rendimiento.",
@@ -78,7 +81,7 @@ export const products: Product[] = [
     category: "Pavimentos Decorativos",
     categorySlug: "pavimentos-decorativos",
     price: 199,
-    image: "/epoxy-art.jpg",
+    image: asset("epoxy-art.jpg"),
     shortDescription: "Sistema metalico con alto impacto visual para suelos decorativos continuos y premium.",
     description:
       "Este sistema permite crear pavimentos decorativos con profundidad, reflejos y movimiento visual. Es perfecto para espacios donde el suelo forma parte de la identidad del ambiente y se busca una imagen diferencial sin renunciar a resistencia y mantenimiento sencillo.",
@@ -100,7 +103,7 @@ export const products: Product[] = [
     category: "Revestimientos de Poliuretano",
     categorySlug: "revestimientos-poliuretano",
     price: 119,
-    image: "/epoxy-products.jpg",
+    image: asset("epoxy-products.jpg"),
     shortDescription: "Acabado protector para interiores y exteriores con defensa UV y alta resistencia al desgaste.",
     description:
       "Capa final ideal para proteger sistemas epoxicos y superficies expuestas a luz, uso continuado o desgaste diario. Mejora la estabilidad del color y prolonga el ciclo de vida de los revestimientos decorativos e industriales.",
@@ -121,7 +124,7 @@ export const products: Product[] = [
     category: "Soluciones para Suelos",
     categorySlug: "soluciones-suelos",
     price: 299,
-    image: "/epoxy-floor.jpg",
+    image: asset("epoxy-floor.jpg"),
     shortDescription: "Kit completo para renovar suelos con imprimacion, epoxi y acabado protector.",
     description:
       "Una solucion completa para usuarios que quieren transformar un suelo con una compra guiada y facil de entender. Incluye las capas esenciales para lograr un acabado limpio, duradero y con apariencia profesional.",
@@ -143,7 +146,7 @@ export const products: Product[] = [
     category: "Acabados de Resina",
     categorySlug: "acabados-resina",
     price: 34.9,
-    image: "/epoxy-art.jpg",
+    image: asset("epoxy-art.jpg"),
     shortDescription: "Pigmentos premium para arte en resina epoxi, muebles y composiciones decorativas.",
     description:
       "Coleccion pensada para aportar profundidad, reflejo y personalidad a cualquier mezcla. Son ideales para artistas, decoradores y aplicadores que buscan acabados con gran carga visual y excelente dispersion dentro de la resina.",
@@ -164,7 +167,7 @@ export const products: Product[] = [
     category: "Resina Epoxi",
     categorySlug: "resina-epoxi",
     price: 129,
-    image: "/epoxy-countertop.jpg",
+    image: asset("epoxy-countertop.jpg"),
     shortDescription: "Resina epoxi para superficies de cocina, bano, barras y mobiliario de alto uso.",
     description:
       "Pensada para crear superficies continuas, atractivas y faciles de mantener, esta resina combina presencia decorativa con prestaciones tecnicas. Es una opcion excelente para proyectos de encimeras de epoxi y revestimientos donde importa tanto el aspecto como la resistencia.",
@@ -186,7 +189,7 @@ export const products: Product[] = [
     category: "Suelos Decorativos",
     categorySlug: "suelos-decorativos",
     price: 175,
-    image: "/epoxy-floor.jpg",
+    image: asset("epoxy-floor.jpg"),
     shortDescription: "Sistema continuo con aspecto mineral para banos, cocinas y espacios contemporaneos.",
     description:
       "Una propuesta decorativa para crear superficies sin juntas, con imagen actual y tacto visual mineral. Muy adecuado para reformas de interior donde se busca una solucion limpia, elegante y funcional.",

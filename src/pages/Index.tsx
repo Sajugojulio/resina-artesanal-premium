@@ -1,164 +1,212 @@
 import { Link } from "react-router-dom";
+import { ArrowRight, Award, Clock, Shield, Sparkles, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Shield, Sparkles, Clock, Award, ArrowRight, Star, CheckCircle, Phone } from "lucide-react";
 import Layout from "@/components/Layout";
 import ProductCard from "@/components/ProductCard";
-import { products, categories } from "@/data/products";
-import heroImage from "@/assets/hero-epoxy.jpg";
+import ResinHeroCanvas from "@/components/ResinHeroCanvas";
+import { categories, products } from "@/data/products";
 import epoxyFloor from "@/assets/epoxy-floor.jpg";
 import epoxyCountertop from "@/assets/epoxy-countertop.jpg";
 import epoxyIndustrial from "@/assets/epoxy-industrial.jpg";
 import epoxyArt from "@/assets/epoxy-art.jpg";
 
-const featuredProducts = products.filter((p) => p.featured);
+const featuredProducts = products.filter((product) => product.featured);
 
 const benefits = [
-  { icon: Shield, title: "Máxima Resistencia", desc: "Formulaciones de alto rendimiento diseñadas para soportar las condiciones más exigentes." },
-  { icon: Sparkles, title: "Acabados Premium", desc: "Efectos metálicos, brillantes y decorativos que transforman cualquier espacio." },
-  { icon: Clock, title: "Durabilidad Extrema", desc: "Productos que mantienen su aspecto y prestaciones durante décadas." },
-  { icon: Award, title: "Calidad Certificada", desc: "Todos nuestros productos cumplen con las normativas europeas más exigentes." },
+  {
+    icon: Shield,
+    title: "Maxima resistencia",
+    desc: "Formulaciones de alto rendimiento preparadas para soportar uso intensivo y entornos exigentes.",
+  },
+  {
+    icon: Sparkles,
+    title: "Acabados premium",
+    desc: "Efectos decorativos, metalicos y cristalinos para proyectos con una presencia visual superior.",
+  },
+  {
+    icon: Clock,
+    title: "Durabilidad real",
+    desc: "Sistemas pensados para mantener brillo, color y resistencia durante mucho tiempo.",
+  },
+  {
+    icon: Award,
+    title: "Calidad profesional",
+    desc: "Soluciones seleccionadas para aplicadores, reformas cuidadas y proyectos de alto nivel estetico.",
+  },
 ];
 
 const applications = [
-  { title: "Pavimentos Industriales", image: epoxyIndustrial, desc: "Suelos resistentes para naves, talleres y almacenes." },
-  { title: "Pavimentos Decorativos", image: epoxyFloor, desc: "Diseños exclusivos con efectos metálicos y 3D." },
-  { title: "Encimeras de Epoxi", image: epoxyCountertop, desc: "Superficies únicas para cocinas y baños de diseño." },
-  { title: "Arte en Resina Epoxi", image: epoxyArt, desc: "Creaciones artísticas con acabados espectaculares." },
+  { title: "Pavimentos industriales", image: epoxyIndustrial, desc: "Suelos resistentes para naves, talleres y almacenes." },
+  { title: "Pavimentos decorativos", image: epoxyFloor, desc: "Disenos exclusivos con efectos metalicos y continuidad visual." },
+  { title: "Encimeras de epoxi", image: epoxyCountertop, desc: "Superficies unicas para cocinas, banos y barras de diseno." },
+  { title: "Arte en resina epoxi", image: epoxyArt, desc: "Creaciones artisticas con profundidad, brillo y color." },
 ];
 
 const testimonials = [
-  { name: "Carlos M.", role: "Arquitecto de interiores", text: "IDP Productos ha sido clave en nuestros proyectos. La calidad de sus resinas es inigualable y el acabado siempre supera expectativas.", rating: 5 },
-  { name: "Laura R.", role: "Reformista profesional", text: "Desde que trabajo con IDP, mis clientes no dejan de elogiar los resultados. Los pavimentos decorativos son espectaculares.", rating: 5 },
-  { name: "Miguel Á.", role: "Artista de resina", text: "Los pigmentos metálicos y la resina cristal son simplemente perfectos para mis obras. Transparencia total y colores vibrantes.", rating: 5 },
+  {
+    name: "Carlos M.",
+    role: "Arquitecto de interiores",
+    text: "IDP Productos ha sido clave en nuestros proyectos. La calidad de sus resinas eleva cada acabado.",
+    rating: 5,
+  },
+  {
+    name: "Laura R.",
+    role: "Reformista profesional",
+    text: "Los pavimentos decorativos tienen una presencia espectacular y el asesoramiento es muy util.",
+    rating: 5,
+  },
+  {
+    name: "Miguel A.",
+    role: "Artista de resina",
+    text: "Los pigmentos y las resinas cristalinas responden justo como necesitas cuando buscas piezas premium.",
+    rating: 5,
+  },
 ];
 
 const Index = () => (
   <Layout>
-    {/* Hero */}
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-      <div className="absolute inset-0">
-        <img src={heroImage} alt="Resina epoxi decorativa - IDP Productos" width={1920} height={1080} className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
-      </div>
-      <div className="container relative z-10 py-20">
+    <section className="resin-hero relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,193,91,0.16),transparent_28%),radial-gradient(circle_at_70%_35%,rgba(65,223,255,0.14),transparent_22%),linear-gradient(140deg,rgba(7,9,13,0.95),rgba(14,20,31,0.92))]" />
+      <div className="absolute inset-y-0 left-[-10%] w-[45%] rounded-full bg-primary/10 blur-3xl" />
+      <div className="absolute inset-y-0 right-[-8%] w-[38%] rounded-full bg-cyan-400/10 blur-3xl" />
+
+      <div className="container relative z-10 grid min-h-[92vh] items-center gap-14 py-20 lg:grid-cols-[1fr_1.05fr] lg:py-10">
         <div className="max-w-2xl">
-          <span className="inline-block text-xs font-semibold tracking-[0.3em] uppercase text-primary mb-6 animate-fade-in">
-            Revestimientos Epóxicos Premium
+          <span className="mb-6 inline-block text-xs font-semibold uppercase tracking-[0.3em] text-primary animate-fade-in">
+            Revestimientos epoxicos premium
           </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-display font-bold leading-[1.1] mb-6 animate-fade-in-up">
-            Transforma tus espacios con{" "}
-            <span className="text-gradient-gold">resina epoxi</span>
+          <h1 className="mb-6 text-4xl font-bold leading-[1.1] animate-fade-in-up sm:text-5xl lg:text-7xl">
+            La resina como{" "}
+            <span className="text-gradient-gold">materia viva</span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-xl mb-8 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-            Soluciones innovadoras en pavimentos decorativos, revestimientos epóxicos y acabados de resina. Calidad, durabilidad y un toque estético único para cada proyecto.
+          <p className="mb-8 max-w-xl text-lg text-muted-foreground animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+            Soluciones innovadoras en pavimentos decorativos, revestimientos epoxicos y acabados de resina con una presencia visual que convierte la portada en parte de la marca.
           </p>
           <div className="flex flex-wrap gap-4 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-            <Button asChild size="lg" className="bg-gradient-gold text-primary-foreground font-semibold text-base px-8 hover:opacity-90">
+            <Button asChild size="lg" className="bg-gradient-gold px-8 text-base font-semibold text-primary-foreground hover:opacity-90">
               <Link to="/tienda">Ver productos</Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="border-primary/40 text-primary hover:bg-primary/10 font-semibold text-base px-8">
+            <Button asChild variant="outline" size="lg" className="border-primary/40 px-8 text-base font-semibold text-primary hover:bg-primary/10">
               <Link to="/contacto">Solicitar asesoramiento</Link>
             </Button>
-            <Button asChild variant="ghost" size="lg" className="text-muted-foreground hover:text-foreground font-medium text-base">
-              <Link to="/soluciones">Descubrir soluciones <ArrowRight className="ml-2 h-4 w-4" /></Link>
+            <Button asChild variant="ghost" size="lg" className="text-base font-medium text-muted-foreground hover:text-foreground">
+              <Link to="/soluciones">
+                Descubrir soluciones <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
           </div>
+
+          <div className="mt-10 grid grid-cols-3 gap-4 animate-fade-in-up" style={{ animationDelay: "0.55s" }}>
+            {[
+              { value: "Brillo", label: "Efecto visual premium" },
+              { value: "Fluidez", label: "Aplicacion y nivelacion" },
+              { value: "Resistencia", label: "Acabado duradero" },
+            ].map((item) => (
+              <div key={item.value} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4 backdrop-blur-md">
+                <p className="text-sm font-semibold text-white">{item.value}</p>
+                <p className="mt-1 text-xs text-white/55">{item.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="relative lg:pl-8">
+          <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-tr from-primary/20 via-cyan-300/10 to-transparent blur-3xl" />
+          <ResinHeroCanvas />
         </div>
       </div>
     </section>
 
-    {/* Categories */}
-    <section className="py-20 bg-gradient-dark">
+    <section className="bg-gradient-dark py-20">
       <div className="container">
-        <div className="text-center mb-12">
-          <span className="text-xs font-semibold tracking-[0.3em] uppercase text-primary">Nuestro catálogo</span>
-          <h2 className="mt-3 text-3xl md:text-4xl font-display font-bold">Categorías de productos</h2>
-          <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
-            Explora nuestra amplia gama de resinas epoxi, revestimientos epóxicos, pavimentos decorativos y soluciones para suelos industriales.
+        <div className="mb-12 text-center">
+          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Nuestro catalogo</span>
+          <h2 className="mt-3 text-3xl font-bold md:text-4xl">Categorias de productos</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
+            Explora nuestra gama de resinas epoxi, revestimientos epoxicos, pavimentos decorativos y soluciones para suelos industriales.
           </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {categories.map((cat) => (
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          {categories.map((category) => (
             <Link
-              key={cat.slug}
-              to={`/tienda?cat=${cat.slug}`}
-              className="group p-6 rounded-lg bg-gradient-card border border-border hover:border-primary/30 text-center transition-all duration-300 hover:glow-gold"
+              key={category.slug}
+              to={`/tienda?cat=${category.slug}`}
+              className="group rounded-lg border border-border bg-gradient-card p-6 text-center transition-all duration-300 hover:border-primary/30 hover:glow-gold"
             >
-              <h3 className="text-sm md:text-base font-semibold text-foreground group-hover:text-primary transition-colors">{cat.name}</h3>
+              <h3 className="text-sm font-semibold text-foreground transition-colors group-hover:text-primary md:text-base">
+                {category.name}
+              </h3>
             </Link>
           ))}
         </div>
       </div>
     </section>
 
-    {/* Benefits */}
     <section className="py-20">
       <div className="container">
-        <div className="text-center mb-14">
-          <span className="text-xs font-semibold tracking-[0.3em] uppercase text-primary">¿Por qué IDP Productos?</span>
-          <h2 className="mt-3 text-3xl md:text-4xl font-display font-bold">La diferencia está en la calidad</h2>
+        <div className="mb-14 text-center">
+          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Por que IDP Productos</span>
+          <h2 className="mt-3 text-3xl font-bold md:text-4xl">La diferencia esta en la calidad</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {benefits.map((b, i) => (
-            <div key={i} className="p-6 rounded-lg bg-gradient-card border border-border text-center group hover:border-primary/30 transition-all duration-300">
-              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
-                <b.icon className="h-7 w-7 text-primary" />
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {benefits.map((benefit) => (
+            <div key={benefit.title} className="group rounded-lg border border-border bg-gradient-card p-6 text-center transition-all duration-300 hover:border-primary/30">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 transition-colors group-hover:bg-primary/20">
+                <benefit.icon className="h-7 w-7 text-primary" />
               </div>
-              <h3 className="text-lg font-display font-semibold mb-2">{b.title}</h3>
-              <p className="text-sm text-muted-foreground">{b.desc}</p>
+              <h3 className="mb-2 text-lg font-semibold">{benefit.title}</h3>
+              <p className="text-sm text-muted-foreground">{benefit.desc}</p>
             </div>
           ))}
         </div>
       </div>
     </section>
 
-    {/* Featured Products */}
-    <section className="py-20 bg-gradient-dark">
+    <section className="bg-gradient-dark py-20">
       <div className="container">
-        <div className="flex items-end justify-between mb-12">
+        <div className="mb-12 flex items-end justify-between">
           <div>
-            <span className="text-xs font-semibold tracking-[0.3em] uppercase text-primary">Productos destacados</span>
-            <h2 className="mt-3 text-3xl md:text-4xl font-display font-bold">Los más vendidos</h2>
+            <span className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Productos destacados</span>
+            <h2 className="mt-3 text-3xl font-bold md:text-4xl">Los mas vendidos</h2>
           </div>
-          <Button asChild variant="ghost" className="hidden md:flex text-primary hover:text-primary/80">
-            <Link to="/tienda">Ver todos <ArrowRight className="ml-2 h-4 w-4" /></Link>
+          <Button asChild variant="ghost" className="hidden text-primary hover:text-primary/80 md:flex">
+            <Link to="/tienda">
+              Ver todos <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
           </Button>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featuredProducts.slice(0, 6).map((p) => (
-            <ProductCard key={p.id} product={p} />
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {featuredProducts.slice(0, 6).map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))}
-        </div>
-        <div className="mt-8 text-center md:hidden">
-          <Button asChild variant="outline" className="border-primary/40 text-primary">
-            <Link to="/tienda">Ver todos los productos</Link>
-          </Button>
         </div>
       </div>
     </section>
 
-    {/* Applications */}
     <section className="py-20">
       <div className="container">
-        <div className="text-center mb-14">
-          <span className="text-xs font-semibold tracking-[0.3em] uppercase text-primary">Aplicaciones</span>
-          <h2 className="mt-3 text-3xl md:text-4xl font-display font-bold">Soluciones para cada proyecto</h2>
-          <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
+        <div className="mb-14 text-center">
+          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Aplicaciones</span>
+          <h2 className="mt-3 text-3xl font-bold md:text-4xl">Soluciones para cada proyecto</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
             Desde pavimentos industriales hasta encimeras de epoxi y arte en resina. Descubre todas las posibilidades.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {applications.map((app, i) => (
-            <Link
-              key={i}
-              to="/soluciones"
-              className="group relative aspect-[16/9] rounded-lg overflow-hidden"
-            >
-              <img src={app.image} alt={app.title} loading="lazy" width={800} height={450} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          {applications.map((application) => (
+            <Link key={application.title} to="/soluciones" className="group relative aspect-[16/9] overflow-hidden rounded-lg">
+              <img
+                src={application.image}
+                alt={application.title}
+                loading="lazy"
+                width={800}
+                height={450}
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h3 className="text-xl font-display font-bold mb-1 group-hover:text-primary transition-colors">{app.title}</h3>
-                <p className="text-sm text-muted-foreground">{app.desc}</p>
+                <h3 className="mb-1 text-xl font-bold transition-colors group-hover:text-primary">{application.title}</h3>
+                <p className="text-sm text-muted-foreground">{application.desc}</p>
               </div>
             </Link>
           ))}
@@ -166,25 +214,24 @@ const Index = () => (
       </div>
     </section>
 
-    {/* Testimonials */}
-    <section className="py-20 bg-gradient-dark">
+    <section className="bg-gradient-dark py-20">
       <div className="container">
-        <div className="text-center mb-14">
-          <span className="text-xs font-semibold tracking-[0.3em] uppercase text-primary">Testimonios</span>
-          <h2 className="mt-3 text-3xl md:text-4xl font-display font-bold">Lo que dicen nuestros clientes</h2>
+        <div className="mb-14 text-center">
+          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Testimonios</span>
+          <h2 className="mt-3 text-3xl font-bold md:text-4xl">Lo que dicen nuestros clientes</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
-            <div key={i} className="p-6 rounded-lg bg-gradient-card border border-border">
-              <div className="flex gap-1 mb-4">
-                {Array.from({ length: t.rating }).map((_, j) => (
-                  <Star key={j} className="h-4 w-4 fill-primary text-primary" />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {testimonials.map((testimonial) => (
+            <div key={testimonial.name} className="rounded-lg border border-border bg-gradient-card p-6">
+              <div className="mb-4 flex gap-1">
+                {Array.from({ length: testimonial.rating }).map((_, index) => (
+                  <Star key={index} className="h-4 w-4 fill-primary text-primary" />
                 ))}
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4">"{t.text}"</p>
+              <p className="mb-4 text-sm leading-relaxed text-muted-foreground">"{testimonial.text}"</p>
               <div>
-                <p className="text-sm font-semibold text-foreground">{t.name}</p>
-                <p className="text-xs text-muted-foreground">{t.role}</p>
+                <p className="text-sm font-semibold text-foreground">{testimonial.name}</p>
+                <p className="text-xs text-muted-foreground">{testimonial.role}</p>
               </div>
             </div>
           ))}
@@ -192,18 +239,17 @@ const Index = () => (
       </div>
     </section>
 
-    {/* Trust Bar */}
-    <section className="py-12 border-y border-border">
+    <section className="border-y border-border py-12">
       <div className="container">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div className="grid grid-cols-2 gap-8 text-center md:grid-cols-4">
           {[
             { value: "500+", label: "Proyectos completados" },
             { value: "98%", label: "Clientes satisfechos" },
-            { value: "15+", label: "Años de experiencia" },
-            { value: "24h", label: "Envío rápido" },
-          ].map((stat, i) => (
-            <div key={i}>
-              <p className="text-3xl font-display font-bold text-gradient-gold">{stat.value}</p>
+            { value: "15+", label: "Anos de experiencia" },
+            { value: "24h", label: "Envio rapido" },
+          ].map((stat) => (
+            <div key={stat.label}>
+              <p className="text-3xl font-bold text-gradient-gold">{stat.value}</p>
               <p className="mt-1 text-sm text-muted-foreground">{stat.label}</p>
             </div>
           ))}
@@ -211,20 +257,17 @@ const Index = () => (
       </div>
     </section>
 
-    {/* Final CTA */}
     <section className="py-24">
       <div className="container text-center">
-        <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
-          ¿Listo para transformar tus espacios?
-        </h2>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-          Nuestro equipo de expertos está preparado para asesorarte en la elección de la solución perfecta para tu proyecto. Contacta con nosotros sin compromiso.
+        <h2 className="mb-4 text-3xl font-bold md:text-5xl">Listo para transformar tus espacios?</h2>
+        <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground">
+          Nuestro equipo esta preparado para asesorarte en la eleccion de la solucion perfecta para tu proyecto.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <Button asChild size="lg" className="bg-gradient-gold text-primary-foreground font-semibold text-base px-8 hover:opacity-90">
+          <Button asChild size="lg" className="bg-gradient-gold px-8 text-base font-semibold text-primary-foreground hover:opacity-90">
             <Link to="/contacto">Solicitar presupuesto</Link>
           </Button>
-          <Button asChild variant="outline" size="lg" className="border-primary/40 text-primary hover:bg-primary/10 font-semibold text-base px-8">
+          <Button asChild variant="outline" size="lg" className="border-primary/40 px-8 text-base font-semibold text-primary hover:bg-primary/10">
             <Link to="/tienda">Explorar productos</Link>
           </Button>
         </div>

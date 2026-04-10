@@ -44,11 +44,6 @@
     --sidebar-accent-foreground: 40 10% 85%;
     --sidebar-border: 215 15% 18%;
     --sidebar-ring: 38 90% 55%;
-
-    --gold-gradient: linear-gradient(135deg, hsl(38, 90%, 55%), hsl(45, 95%, 65%));
-    --dark-gradient: linear-gradient(180deg, hsl(220, 20%, 7%) 0%, hsl(220, 18%, 12%) 100%);
-    --card-gradient: linear-gradient(145deg, hsl(220, 18%, 12%), hsl(220, 18%, 8%));
-    --glow-gold: 0 0 40px hsl(38, 90%, 55%, 0.15);
   }
 }
 
@@ -93,4 +88,24 @@
   .border-gold {
     border-color: hsl(38, 90%, 55%, 0.3);
   }
+}
+
+.resin-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 215, 143, 0.12), transparent 22%),
+    radial-gradient(circle at 82% 22%, rgba(88, 226, 255, 0.1), transparent 20%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03), transparent 24%);
+  pointer-events: none;
+}
+
+.resin-orb-shell::after {
+  content: "";
+  position: absolute;
+  inset: 1.25rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  pointer-events: none;
 }
