@@ -94,3 +94,75 @@
     border-color: hsl(38, 90%, 55%, 0.3);
   }
 }
+
+.hero-resin-stage {
+  isolation: isolate;
+}
+
+.hero-resin-base {
+  transform: scale(1.02);
+}
+
+.hero-resin-motion,
+.hero-resin-shimmer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-resin-motion {
+  opacity: 0.55;
+  filter: saturate(1.08) brightness(1.04);
+  mix-blend-mode: screen;
+  clip-path: ellipse(35% 40% at 63% 57%);
+  animation: resin-flow-drift 8s ease-in-out infinite alternate;
+}
+
+.hero-resin-shimmer {
+  opacity: 0.28;
+  mix-blend-mode: soft-light;
+  clip-path: ellipse(30% 28% at 67% 60%);
+  animation: resin-flow-shimmer 6s ease-in-out infinite alternate;
+}
+
+@keyframes resin-flow-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1.02);
+  }
+
+  35% {
+    transform: translate3d(0.35%, 0.8%, 0) scale(1.032);
+  }
+
+  70% {
+    transform: translate3d(-0.45%, -0.25%, 0) scale(1.026);
+  }
+
+  100% {
+    transform: translate3d(0.55%, 0.55%, 0) scale(1.035);
+  }
+}
+
+@keyframes resin-flow-shimmer {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1.015);
+    filter: brightness(1.02) saturate(1.08);
+  }
+
+  50% {
+    transform: translate3d(-0.5%, 0.4%, 0) scale(1.028);
+    filter: brightness(1.12) saturate(1.16);
+  }
+
+  100% {
+    transform: translate3d(0.4%, -0.35%, 0) scale(1.02);
+    filter: brightness(1.05) saturate(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-resin-motion,
+  .hero-resin-shimmer {
+    animation: none;
+  }
+}

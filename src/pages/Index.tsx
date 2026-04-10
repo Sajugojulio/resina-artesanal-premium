@@ -36,8 +36,30 @@ const Index = () => (
   <Layout>
     {/* Hero */}
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-      <div className="absolute inset-0">
-        <img src={heroImage} alt="Resina epoxi decorativa - IDP Productos" width={1920} height={1080} className="w-full h-full object-cover" />
+      <div className="absolute inset-0 hero-resin-stage">
+        <img
+          src={heroImage}
+          alt="Resina epoxi decorativa - IDP Productos"
+          width={1920}
+          height={1080}
+          className="hero-resin-base w-full h-full object-cover"
+        />
+        <img
+          src={heroImage}
+          alt=""
+          aria-hidden="true"
+          width={1920}
+          height={1080}
+          className="hero-resin-motion w-full h-full object-cover"
+        />
+        <img
+          src={heroImage}
+          alt=""
+          aria-hidden="true"
+          width={1920}
+          height={1080}
+          className="hero-resin-shimmer w-full h-full object-cover"
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
       </div>
       <div className="container relative z-10 py-20">
