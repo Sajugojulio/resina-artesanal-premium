@@ -26,7 +26,7 @@ const isBulletLike = (text: string) => {
   return !/[.:;]/.test(text) || /^[A-ZÁÉÍÓÚÑ0-9][^:]+$/.test(text);
 };
 
-const renderTable = (rows: string[][], title: string) => {
+const renderTable = (rows: string[][], title: string, compact = false) => {
   const maxColumns = rows.reduce((max, row) => Math.max(max, row.length), 0);
   const normalizedRows = rows.map((row) => [...row, ...Array(Math.max(0, maxColumns - row.length)).fill("")]);
   const [header, ...body] = normalizedRows;
@@ -35,13 +35,16 @@ const renderTable = (rows: string[][], title: string) => {
   const effectiveBody = hasComplexHeader && body.length > 0 ? body.slice(1) : body;
 
   return (
-    <div className="overflow-hidden rounded-xl border border-emerald-900/10 bg-white/70">
+    <div className="overflow-hidden rounded-xl border border-emerald-900/10 bg-white/70 break-inside-avoid-column">
       <div className="overflow-x-auto">
-        <table className="min-w-full border-collapse text-sm">
+        <table className={`min-w-full border-collapse ${compact ? "text-[12px]" : "text-sm"}`}>
           <thead className="bg-emerald-700 text-white">
             <tr>
               {effectiveHeader.map((cell, index) => (
-                <th key={`${title}-head-${index}`} className="border border-emerald-800/30 px-3 py-3 text-left font-semibold">
+                <th
+                  key={`${title}-head-${index}`}
+                  className={`${compact ? "px-2.5 py-2" : "px-3 py-3"} border border-emerald-800/30 text-left font-semibold`}
+                >
                   {cell || "Dato"}
                 </th>
               ))}
@@ -51,7 +54,10 @@ const renderTable = (rows: string[][], title: string) => {
             {effectiveBody.map((row, rowIndex) => (
               <tr key={`${title}-row-${rowIndex}`} className={rowIndex % 2 === 0 ? "bg-white" : "bg-emerald-50/45"}>
                 {row.map((cell, cellIndex) => (
-                  <td key={`${title}-cell-${rowIndex}-${cellIndex}`} className="border border-slate-200 px-3 py-3 align-top text-slate-700">
+                  <td
+                    key={`${title}-cell-${rowIndex}-${cellIndex}`}
+                    className={`${compact ? "px-2.5 py-2 leading-5" : "px-3 py-3"} border border-slate-200 align-top text-slate-700`}
+                  >
                     {cell || "—"}
                   </td>
                 ))}
@@ -71,6 +77,7 @@ const BrandedTechnicalSheet = ({ product, standalone = false }: { product: Produ
   const pdfHref = `${import.meta.env.BASE_URL}#/producto/${product.slug}/ficha-pdf`;
   const logoHref = `${import.meta.env.BASE_URL}branding/idp-logo-boceto.png`;
   const heroHighlights = [...product.benefits.slice(0, 5), ...product.applications.slice(0, 3)];
+  const technicalContentClass = standalone ? "columns-1 gap-8 xl:columns-2 xl:gap-10" : "space-y-8";
 
   return (
     <section id="ficha-tecnica-idp" className={standalone ? "" : "mt-20"}>
@@ -182,22 +189,26 @@ const BrandedTechnicalSheet = ({ product, standalone = false }: { product: Produ
             </p>
           </div>
 
-          <div className="space-y-10">
+          <div className={technicalContentClass}>
             {sections.map((section) => {
               const paragraphBlocks = section.blocks.filter((block): block is SheetBlockParagraph => block.type === "paragraph");
               const tableBlocks = section.blocks.filter((block): block is SheetBlockTable => block.type === "table");
               const bulletish = paragraphBlocks.length > 1 && paragraphBlocks.every((block) => isBulletLike(block.text));
+              const hasTables = tableBlocks.length > 0;
+              const sectionClassName = standalone
+                ? `mb-6 break-inside-avoid-column ${hasTables ? "column-span-all" : "space-y-3"}`
+                : "space-y-5";
 
               return (
-                <section key={section.title} className="space-y-5">
+                <section key={section.title} className={sectionClassName}>
                   <div className="border-b border-emerald-900/10 pb-3">
-                    <h4 className="text-xl font-bold text-emerald-900">{section.title}</h4>
+                    <h4 className={`${standalone ? "text-base" : "text-xl"} font-bold text-emerald-900`}>{section.title}</h4>
                   </div>
 
                   {paragraphBlocks.length > 0 && !bulletish && (
-                    <div className="space-y-4">
+                    <div className={standalone ? "space-y-2.5" : "space-y-4"}>
                       {paragraphBlocks.map((block, index) => (
-                        <p key={`${section.title}-p-${index}`} className="leading-7 text-slate-700">
+                        <p key={`${section.title}-p-${index}`} className={`${standalone ? "text-[12px] leading-5" : "leading-7"} text-slate-700`}>
                           {block.text}
                         </p>
                       ))}
@@ -205,9 +216,12 @@ const BrandedTechnicalSheet = ({ product, standalone = false }: { product: Produ
                   )}
 
                   {bulletish && (
-                    <ul className="grid gap-3 md:grid-cols-2">
+                    <ul className={`grid gap-2.5 ${standalone ? "grid-cols-1" : "md:grid-cols-2"}`}>
                       {paragraphBlocks.map((block, index) => (
-                        <li key={`${section.title}-li-${index}`} className="rounded-2xl border border-emerald-900/10 bg-emerald-50/55 px-4 py-3 text-sm leading-6 text-slate-700">
+                        <li
+                          key={`${section.title}-li-${index}`}
+                          className={`${standalone ? "rounded-xl px-3 py-2 text-[12px] leading-5" : "rounded-2xl px-4 py-3 text-sm leading-6"} border border-emerald-900/10 bg-emerald-50/55 text-slate-700`}
+                        >
                           {block.text}
                         </li>
                       ))}
@@ -215,7 +229,9 @@ const BrandedTechnicalSheet = ({ product, standalone = false }: { product: Produ
                   )}
 
                   {tableBlocks.map((block, index) => (
-                    <div key={`${section.title}-table-${index}`}>{renderTable(block.rows, `${section.title}-${index}`)}</div>
+                    <div key={`${section.title}-table-${index}`} className={standalone ? "mt-3" : ""}>
+                      {renderTable(block.rows, `${section.title}-${index}`, standalone)}
+                    </div>
                   ))}
                 </section>
               );
