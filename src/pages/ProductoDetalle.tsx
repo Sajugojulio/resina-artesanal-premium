@@ -28,6 +28,10 @@ const ProductoDetalle = () => {
   const { addToCart } = useShop();
   const [quantity, setQuantity] = useState(1);
 
+  const scrollToSheet = () => {
+    document.getElementById("ficha-tecnica-idp")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   const product = products.find((entry) => entry.slug === slug);
 
   if (!product) {
@@ -90,15 +94,16 @@ const ProductoDetalle = () => {
                 </div>
 
                 <div className="mt-5 grid gap-3">
-                  <a
-                    href="#ficha-tecnica-idp"
+                  <button
+                    type="button"
+                    onClick={scrollToSheet}
                     className="flex items-center justify-between rounded-lg border border-emerald-500/20 bg-background/50 px-4 py-3 transition-colors hover:border-emerald-400/50"
                   >
                     <div>
                       <p className="font-medium text-foreground">Ver ficha tecnica IDP fusionada</p>
                       <p className="text-xs text-muted-foreground">Etiqueta + contenido tecnico integrados en la misma ficha</p>
                     </div>
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
