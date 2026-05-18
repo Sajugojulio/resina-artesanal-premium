@@ -69,6 +69,7 @@ const BrandedTechnicalSheet = ({ product, standalone = false }: { product: Produ
   const sections = (technicalSheets as Record<string, SheetSection[]>)[product.slug] ?? [];
   const sourceDocument = product.documents[0];
   const pdfHref = `${import.meta.env.BASE_URL}#/producto/${product.slug}/ficha-pdf`;
+  const logoHref = `${import.meta.env.BASE_URL}branding/idp-logo-boceto.png`;
 
   return (
     <section id="ficha-tecnica-idp" className={standalone ? "" : "mt-20"}>
@@ -104,8 +105,18 @@ const BrandedTechnicalSheet = ({ product, standalone = false }: { product: Produ
         <div className="border-b border-emerald-900/10 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-600 px-8 py-8 text-white">
           <div className="flex flex-wrap items-start justify-between gap-6">
             <div className="max-w-3xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.38em] text-emerald-100">IDP IBERICA S.L.</p>
-              <h3 className="mt-4 text-3xl font-black tracking-[0.08em]">{label.commercialName}</h3>
+              <div className="flex items-center gap-4">
+                <img
+                  src={logoHref}
+                  alt="Logo IDP Iberica"
+                  className="h-16 w-16 rounded-2xl border border-white/15 bg-white p-2 shadow-lg shadow-emerald-950/20"
+                />
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.38em] text-emerald-100">IDP IBERICA S.L.</p>
+                  <p className="mt-2 text-sm font-medium text-emerald-50/90">FICHA TECNICA COMERCIAL</p>
+                </div>
+              </div>
+              <h3 className="mt-6 text-3xl font-black tracking-[0.08em]">{label.commercialName}</h3>
               <p className="mt-4 max-w-2xl text-sm leading-relaxed text-emerald-50/90">
                 {label.componentValue}
               </p>
