@@ -70,6 +70,7 @@ const BrandedTechnicalSheet = ({ product, standalone = false }: { product: Produ
   const sourceDocument = product.documents[0];
   const pdfHref = `${import.meta.env.BASE_URL}#/producto/${product.slug}/ficha-pdf`;
   const logoHref = `${import.meta.env.BASE_URL}branding/idp-logo-boceto.png`;
+  const heroHighlights = [...product.benefits.slice(0, 5), ...product.applications.slice(0, 3)];
 
   return (
     <section id="ficha-tecnica-idp" className={standalone ? "" : "mt-20"}>
@@ -101,59 +102,84 @@ const BrandedTechnicalSheet = ({ product, standalone = false }: { product: Produ
         </div>
       )}
 
-      <div className="overflow-hidden rounded-[28px] border border-emerald-500/20 bg-white text-slate-900 shadow-[0_30px_80px_rgba(0,0,0,0.28)]">
-        <div className="border-b border-emerald-900/10 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-600 px-8 py-8 text-white">
-          <div className="flex flex-wrap items-start justify-between gap-6">
-            <div className="max-w-3xl">
-              <div className="flex items-center gap-4">
-                <img
-                  src={logoHref}
-                  alt="Logo IDP Iberica"
-                  className="h-16 w-16 rounded-2xl border border-white/15 bg-white p-2 shadow-lg shadow-emerald-950/20"
-                />
+      <div className="relative overflow-hidden rounded-[28px] border border-emerald-500/20 bg-white text-slate-900 shadow-[0_30px_80px_rgba(0,0,0,0.28)]">
+        <div className="absolute inset-y-0 right-0 w-5 bg-emerald-500/95" />
+
+        <div className="px-8 py-10 md:px-12">
+          <div className="max-w-[calc(100%-1.5rem)]">
+            <img src={logoHref} alt="Logo IDP Iberica" className="h-24 w-auto object-contain" />
+            <div className="mt-8 border-t border-slate-300" />
+
+            <div className="mt-10">
+              <p className="text-5xl font-black tracking-tight text-emerald-600 md:text-6xl">{product.name}</p>
+              <h3 className="mt-4 max-w-4xl text-2xl font-bold leading-tight text-slate-900 md:text-3xl">
+                {product.shortDescription}
+              </h3>
+            </div>
+
+            <div className="mt-10 border-t border-slate-300 pt-8">
+              <div className="grid gap-10 lg:grid-cols-[1.1fr_0.55fr]">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.38em] text-emerald-100">IDP IBERICA S.L.</p>
-                  <p className="mt-2 text-sm font-medium text-emerald-50/90">FICHA TECNICA COMERCIAL</p>
+                  <ul className="space-y-3 text-xl leading-tight text-slate-800 md:text-[1.9rem] md:leading-[1.2]">
+                    {heroHighlights.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="space-y-5">
+                  <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-5">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-emerald-700">{label.systemLabel}</p>
+                    <p className="mt-3 text-lg font-semibold text-slate-900">{label.systemValue}</p>
+                  </div>
+                  <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-5">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-emerald-700">{label.manufacturerLabel}</p>
+                    <p className="mt-3 text-lg font-semibold text-slate-900">{label.manufacturerValue}</p>
+                  </div>
+                  <div className="rounded-3xl border border-emerald-200 bg-white p-5">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-500">Relacion de producto</p>
+                    <div className="mt-3 space-y-2 text-sm text-slate-700">
+                      {product.specs.slice(0, 3).map((spec) => (
+                        <p key={spec.label}>
+                          <span className="font-semibold">{spec.label}:</span> {spec.value}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-              <h3 className="mt-6 text-3xl font-black tracking-[0.08em]">{label.commercialName}</h3>
-              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-emerald-50/90">
-                {label.componentValue}
-              </p>
             </div>
-            <div className="min-w-[220px] rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-emerald-100">{label.systemLabel}</p>
-              <p className="mt-2 text-base font-semibold">{label.systemValue}</p>
-              <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-emerald-100">{label.manufacturerLabel}</p>
-              <p className="mt-2 text-base font-semibold">{label.manufacturerValue}</p>
-            </div>
-          </div>
-        </div>
 
-        <div className="border-b border-emerald-900/10 bg-emerald-50/80 px-8 py-5">
-          <div className="grid gap-4 md:grid-cols-3">
-            {[
-              { title: "Lote", value: "................................" },
-              { title: "Kg", value: "................................" },
-              { title: "Fecha de fabricacion", value: "................................" },
-            ].map((field) => (
-              <div key={field.title} className="rounded-2xl border border-emerald-900/10 bg-white px-4 py-4">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-emerald-700">{field.title}</p>
-                <p className="mt-4 text-sm text-slate-500">{field.value}</p>
+            <div className="mt-12 border-t border-slate-300 pt-6">
+              <div className="grid gap-6 md:grid-cols-[0.9fr_1.1fr]">
+                <div className="flex items-end gap-4">
+                  <img src={logoHref} alt="Logo IDP Iberica" className="h-14 w-auto object-contain opacity-90" />
+                  <div className="text-sm text-slate-700">
+                    <p className="font-bold text-slate-900">{label.companyName}</p>
+                    {label.companyAddress.map((line) => (
+                      <p key={line}>{line}</p>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid gap-3 md:grid-cols-3">
+                  {[
+                    { title: "Lote", value: "................................" },
+                    { title: "Kg", value: "................................" },
+                    { title: "Fecha de fabricacion", value: "................................" },
+                  ].map((field) => (
+                    <div key={field.title} className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-500">{field.title}</p>
+                      <p className="mt-4 text-sm text-slate-500">{field.value}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
-          <div className="mt-4 rounded-2xl border border-emerald-900/10 bg-white px-4 py-4">
-            <p className="text-sm font-bold text-emerald-800">{label.companyName}</p>
-            {label.companyAddress.map((line) => (
-              <p key={line} className="mt-1 text-sm text-slate-600">
-                {line}
-              </p>
-            ))}
+            </div>
           </div>
         </div>
 
-        <div className="px-8 py-8">
+        <div className="px-8 pb-8 md:px-12 md:pb-12">
           <div className="mb-8 flex items-center gap-3 rounded-2xl border border-emerald-900/10 bg-emerald-50 px-5 py-4">
             <FileText className="h-5 w-5 text-emerald-700" />
             <p className="text-sm text-slate-700">
