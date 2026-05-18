@@ -4,6 +4,18 @@ export interface ProductDocument {
   format: "DOCX" | "PDF";
 }
 
+export interface ProductLabelData {
+  commercialName: string;
+  componentLabel: string;
+  componentValue: string;
+  systemLabel: string;
+  systemValue: string;
+  manufacturerLabel: string;
+  manufacturerValue: string;
+  companyName: string;
+  companyAddress: string[];
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -28,6 +40,33 @@ export interface Product {
 const baseUrl = import.meta.env.BASE_URL;
 const asset = (path: string) => `${baseUrl}${path}`;
 const doc = (path: string) => `${baseUrl}technical-sheets/${path}`;
+
+const buildComponentValue = (product: Product) => {
+  switch (product.categorySlug) {
+    case "epoxi-base-agua":
+      return "Sistema epoxi bicomponente base agua";
+    case "epoxi-100-solidos":
+      return "Resina epoxi bicomponente 100% solidos";
+    case "pavimentos-continuos":
+      return "Sistema continuo para pavimentos tecnicos";
+    case "impermeabilizacion":
+      return "Sistema tecnico de impermeabilizacion";
+    default:
+      return "Sistema tecnico para revestimientos y acabados";
+  }
+};
+
+export const getProductLabelData = (product: Product): ProductLabelData => ({
+  commercialName: product.name.toUpperCase(),
+  componentLabel: "Componente",
+  componentValue: buildComponentValue(product),
+  systemLabel: "Linea",
+  systemValue: product.line,
+  manufacturerLabel: "Fabricante base",
+  manufacturerValue: product.manufacturer,
+  companyName: "IDP IBERICA S.L.",
+  companyAddress: ["Calle Olivar Grande 45", "45662 Alcaudete de la Jara, Toledo"],
+});
 
 export const categories = [
   { name: "Epoxi Base Agua", slug: "epoxi-base-agua" },

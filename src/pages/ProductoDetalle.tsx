@@ -4,6 +4,7 @@ import { ArrowLeft, CheckCircle, Download, FileText, Minus, Plus, ShoppingCart }
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
 import ProductCard from "@/components/ProductCard";
+import ProductLabelPreview from "@/components/ProductLabelPreview";
 import { products } from "@/data/products";
 import { useShop } from "@/context/ShopContext";
 
@@ -106,6 +107,8 @@ const ProductoDetalle = () => {
                   ))}
                 </div>
               </div>
+
+              <ProductLabelPreview product={product} />
             </div>
 
             <div>

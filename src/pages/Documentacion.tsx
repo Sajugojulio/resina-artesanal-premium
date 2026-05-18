@@ -69,6 +69,7 @@ const Documentacion = () => {
                   <span className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">Fabricante base: {product.manufacturer}</span>
                   <span className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">Marca: {product.brand}</span>
                   <span className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">Linea: {product.line}</span>
+                  <span className="rounded-full border border-emerald-500/30 bg-emerald-500/5 px-3 py-1 text-xs text-emerald-300">Etiqueta IDP implementada</span>
                 </div>
 
                 <div className="mt-6 grid gap-3">
