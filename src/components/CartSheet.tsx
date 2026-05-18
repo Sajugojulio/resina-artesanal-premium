@@ -29,9 +29,9 @@ const CartSheet = () => {
       </SheetTrigger>
       <SheetContent className="w-full border-border bg-card sm:max-w-lg">
         <SheetHeader>
-          <SheetTitle>Tu selección</SheetTitle>
+          <SheetTitle>Tu seleccion tecnica</SheetTitle>
           <SheetDescription>
-            Revisa productos, ajusta cantidades y solicita presupuesto cuando quieras.
+            Revisa referencias, ajusta cantidades y prepara una consulta con contexto documental.
           </SheetDescription>
         </SheetHeader>
 
@@ -39,12 +39,12 @@ const CartSheet = () => {
           {cart.length === 0 ? (
             <div className="flex flex-1 flex-col items-center justify-center rounded-lg border border-dashed border-border px-6 text-center">
               <ShoppingBag className="mb-4 h-10 w-10 text-muted-foreground" />
-              <h3 className="text-lg font-semibold">Todavía no has añadido productos</h3>
+              <h3 className="text-lg font-semibold">Todavia no has anadido productos</h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                Guarda aquí tus resinas, pavimentos y acabados favoritos para preparar una consulta o pedido.
+                Guarda aqui las referencias tecnicas y te ayudamos a preparar presupuesto y documentacion.
               </p>
               <Button asChild className="mt-6 bg-gradient-gold text-primary-foreground hover:opacity-90">
-                <Link to="/tienda">Ir a la tienda</Link>
+                <Link to="/tienda">Ir al catalogo</Link>
               </Button>
             </div>
           ) : (
@@ -69,7 +69,9 @@ const CartSheet = () => {
                           <Link to={`/producto/${product.slug}`} className="mt-1 block font-semibold hover:text-primary">
                             {product.name}
                           </Link>
-                          <p className="mt-2 text-sm text-muted-foreground">{product.price.toFixed(2)} €</p>
+                          <p className="mt-2 text-sm text-muted-foreground">
+                            {product.price !== undefined ? `${product.price.toFixed(2)} €` : "Presupuesto bajo consulta"}
+                          </p>
                           <div className="mt-3 flex items-center justify-between gap-3">
                             <div className="flex items-center rounded-md border border-border">
                               <button
@@ -105,11 +107,13 @@ const CartSheet = () => {
 
               <div className="mt-6 border-t border-border pt-6">
                 <div className="mb-4 flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">Subtotal estimado</span>
-                  <span className="text-lg font-bold text-gradient-gold">{cartSubtotal.toFixed(2)} €</span>
+                  <span className="text-muted-foreground">Resumen de la seleccion</span>
+                  <span className="text-lg font-bold text-gradient-gold">
+                    {cartSubtotal > 0 ? `${cartSubtotal.toFixed(2)} €` : `${cartCount} referencias`}
+                  </span>
                 </div>
                 <p className="mb-4 text-xs text-muted-foreground">
-                  El carrito funciona como lista de selección para preparar presupuesto o consulta técnica.
+                  El carrito funciona como lista de seleccion para preparar presupuesto, consulta tecnica y fichas.
                 </p>
                 <div className="flex gap-3">
                   <Button asChild className="flex-1 bg-gradient-gold text-primary-foreground hover:opacity-90">

@@ -9,6 +9,7 @@ import ProductoDetalle from "./pages/ProductoDetalle";
 import Nosotros from "./pages/Nosotros";
 import Soluciones from "./pages/Soluciones";
 import Contacto from "./pages/Contacto";
+import Documentacion from "./pages/Documentacion";
 import NotFound from "./pages/NotFound";
 import { ShopProvider } from "./context/ShopContext";
 
@@ -24,6 +25,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/tienda" element={<Tienda />} />
+            <Route path="/documentacion" element={<Documentacion />} />
             <Route path="/producto/:slug" element={<ProductoDetalle />} />
             <Route path="/nosotros" element={<Nosotros />} />
             <Route path="/soluciones" element={<Soluciones />} />

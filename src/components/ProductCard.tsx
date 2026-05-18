@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ShoppingBag } from "lucide-react";
+import { ArrowRight, FileText, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Product } from "@/data/products";
 import { useShop } from "@/context/ShopContext";
@@ -29,13 +29,20 @@ const ProductCard = ({ product }: { product: Product }) => {
           </h3>
         </Link>
         <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{product.shortDescription}</p>
-        <div className="mt-4 flex items-center justify-between">
-          <span className="text-xl font-bold text-gradient-gold">{product.price.toFixed(2)} €</span>
+        <div className="mt-4 flex items-center justify-between gap-4">
+          <div>
+            <span className="text-lg font-bold text-gradient-gold">
+              {product.price !== undefined ? `${product.price.toFixed(2)} €` : "Presupuesto a medida"}
+            </span>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {product.documents[0] ? `Ficha ${product.documents[0].format} disponible` : "Consulta tecnica disponible"}
+            </p>
+          </div>
           <Link
             to={`/producto/${product.slug}`}
             className="flex items-center gap-1 text-sm text-primary opacity-0 transition-opacity group-hover:opacity-100"
           >
-            Ver más <ArrowRight className="h-4 w-4" />
+            Ver mas <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
         <div className="mt-4 flex gap-3">
@@ -44,10 +51,13 @@ const ProductCard = ({ product }: { product: Product }) => {
             onClick={() => addToCart(product.id)}
           >
             <ShoppingBag className="mr-2 h-4 w-4" />
-            Añadir
+            Seleccionar
           </Button>
           <Button asChild variant="outline" className="border-border">
-            <Link to={`/producto/${product.slug}`}>Ficha</Link>
+            <Link to={`/producto/${product.slug}`}>
+              <FileText className="mr-2 h-4 w-4" />
+              Ficha
+            </Link>
           </Button>
         </div>
       </div>

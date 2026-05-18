@@ -82,14 +82,14 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
     () =>
       cart.reduce((total, item) => {
         const product = products.find((entry) => entry.id === item.productId);
-        return total + (product ? product.price * item.quantity : 0);
+        return total + (product?.price ? product.price * item.quantity : 0);
       }, 0),
     [cart],
   );
 
   const buildQuoteMessage = () => {
     if (cart.length === 0) {
-      return "Hola, me gustaría recibir asesoramiento sobre soluciones de resina epoxi para mi proyecto.";
+      return "Hola, me gustaría recibir asesoramiento sobre soluciones técnicas de IDP para mi proyecto.";
     }
 
     const lines = cart
@@ -103,7 +103,7 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
       })
       .filter(Boolean);
 
-    return `Hola, me gustaría solicitar presupuesto y asesoramiento para los siguientes productos:\n${lines.join("\n")}\n\nTambién agradecería recomendaciones sobre el sistema más adecuado para mi proyecto.`;
+    return `Hola, me gustaría solicitar presupuesto y asesoramiento para los siguientes productos:\n${lines.join("\n")}\n\nTambién agradecería recomendaciones sobre el sistema más adecuado y la ficha técnica correspondiente para mi proyecto.`;
   };
 
   return (

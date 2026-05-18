@@ -36,10 +36,10 @@ const Contacto = () => {
     if (selectedProduct) {
       setForm((current) => ({
         ...current,
-        subject: current.subject || `Presupuesto para ${selectedProduct.name}`,
+        subject: current.subject || `Consulta tecnica sobre ${selectedProduct.name}`,
         message:
           current.message ||
-          `Hola, me gustaria recibir informacion y presupuesto para ${selectedProduct.name}. Mi proyecto esta relacionado con ${selectedProduct.applications[0].toLowerCase()}.`,
+          `Hola, me gustaria recibir informacion, ficha tecnica y presupuesto para ${selectedProduct.name}. Mi proyecto esta relacionado con ${selectedProduct.applications[0].toLowerCase()}.`,
       }));
       return;
     }
@@ -84,7 +84,7 @@ const Contacto = () => {
           <span className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Contacto</span>
           <h1 className="mt-3 text-4xl font-bold md:text-5xl">Hablemos de tu proyecto</h1>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Te ayudamos a elegir la solucion mas adecuada en resina epoxi, pavimentos decorativos y revestimientos profesionales.
+            Te ayudamos a elegir la solucion tecnica adecuada, preparar la documentacion y definir un presupuesto serio para tu proyecto.
           </p>
         </div>
       </section>
@@ -113,7 +113,7 @@ const Contacto = () => {
               <div className="rounded-lg border border-border bg-gradient-card p-6">
                 <p className="text-sm font-semibold text-primary">Asesoramiento tecnico</p>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Si estas comparando sistemas o no tienes claro el acabado, te ayudamos a definir una solucion viable segun soporte, uso y estetica.
+                  Si estas comparando sistemas, fichas o productos, te ayudamos a traducir la documentacion tecnica en una solucion real de compra y aplicacion.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <Button asChild variant="outline" className="border-primary/40 text-primary hover:bg-primary/10">
@@ -135,14 +135,14 @@ const Contacto = () => {
                     <>
                       <h3 className="mt-2 text-lg font-semibold">{selectedProduct.name}</h3>
                       <p className="mt-2 text-sm text-muted-foreground">
-                        Hemos precargado la consulta para que pidas informacion sobre este producto concreto.
+                        Hemos precargado la consulta para que pidas informacion, ficha y presupuesto sobre esta referencia concreta.
                       </p>
                     </>
                   ) : (
                     <>
                       <h3 className="mt-2 text-lg font-semibold">Seleccion de productos activa</h3>
                       <p className="mt-2 text-sm text-muted-foreground">
-                        Tienes {cart.length} referencias guardadas con un subtotal estimado de {cartSubtotal.toFixed(2)} €.
+                        Tienes {cart.length} referencias guardadas{cartSubtotal > 0 ? ` con un subtotal estimado de ${cartSubtotal.toFixed(2)} €` : ""}.
                       </p>
                       <Button variant="ghost" className="mt-3 px-0 text-primary hover:bg-transparent" onClick={clearCart}>
                         Vaciar seleccion
@@ -195,7 +195,7 @@ const Contacto = () => {
                       required
                       value={form.subject}
                       onChange={(event) => setForm({ ...form, subject: event.target.value })}
-                      placeholder="Presupuesto, consulta tecnica, producto..."
+                      placeholder="Presupuesto, consulta tecnica, ficha..."
                       className="border-border bg-secondary/50"
                     />
                   </div>
@@ -208,7 +208,7 @@ const Contacto = () => {
                     rows={7}
                     value={form.message}
                     onChange={(event) => setForm({ ...form, message: event.target.value })}
-                    placeholder="Cuentanos que superficie quieres tratar, el acabado que buscas y cualquier duda tecnica."
+                    placeholder="Cuentanos que superficie quieres tratar, el sistema que valoras y si necesitas ficha, presupuesto o apoyo tecnico."
                     className="border-border bg-secondary/50"
                   />
                 </div>
@@ -232,13 +232,18 @@ const Contacto = () => {
           </div>
 
           <div className="mt-16 rounded-xl border border-border bg-gradient-dark p-8 text-center">
-            <h2 className="text-2xl font-bold">Tambien podemos orientarte por aplicaciones</h2>
+            <h2 className="text-2xl font-bold">Tambien podemos orientarte por familia de sistema</h2>
             <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
-              Si aun no sabes que producto elegir, revisa nuestras soluciones por uso y despues vuelve aqui con mas contexto.
+              Si aun no sabes que referencia elegir, revisa primero el catalogo tecnico y las fichas. Luego volvemos aqui con mas contexto.
             </p>
-            <Button asChild className="mt-6 bg-gradient-gold text-primary-foreground hover:opacity-90">
-              <Link to="/soluciones">Ver soluciones</Link>
-            </Button>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <Button asChild className="bg-gradient-gold text-primary-foreground hover:opacity-90">
+                <Link to="/tienda">Ver catalogo</Link>
+              </Button>
+              <Button asChild variant="outline" className="border-primary/40 text-primary hover:bg-primary/10">
+                <Link to="/documentacion">Ver fichas tecnicas</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>

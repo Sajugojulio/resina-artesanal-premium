@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, CheckCircle, FileText, Minus, Plus, ShoppingCart } from "lucide-react";
+import { ArrowLeft, CheckCircle, Download, FileText, Minus, Plus, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
 import ProductCard from "@/components/ProductCard";
@@ -9,16 +9,16 @@ import { useShop } from "@/context/ShopContext";
 
 const faqs = [
   {
-    q: "Como calculo la cantidad que necesito?",
-    a: "Depende del sistema, del espesor y del soporte. Si anades productos a tu seleccion, en contacto podremos orientarte con una propuesta mas precisa.",
+    q: "Puedo descargar ya la ficha tecnica?",
+    a: "Si. Cada referencia incluida en esta fase incorpora su documentacion tecnica para consulta y descarga directa.",
   },
   {
-    q: "Es apto para aplicacion profesional y particular?",
-    a: "Si. Hay referencias pensadas para aplicadores y otras muy apropiadas para proyectos de reforma o decoracion guiados.",
+    q: "Los nombres y fichas son definitivos?",
+    a: "La estructura ya esta preparada para crecer. Podemos ir anadiendo nuevas referencias, versiones o documentos sin rehacer la web.",
   },
   {
-    q: "Puedo pedir asesoramiento antes de comprar?",
-    a: "Claro. La web esta preparada para que envies tu seleccion y te recomendemos el sistema de resina mas adecuado.",
+    q: "Podeis personalizar la documentacion con identidad IDP?",
+    a: "Ese es precisamente el siguiente paso natural: maquetar las fichas con logo, tipografia y paleta verde de IDP.",
   },
 ];
 
@@ -35,7 +35,7 @@ const ProductoDetalle = () => {
         <div className="container py-20 text-center">
           <h1 className="mb-4 text-2xl font-bold">Producto no encontrado</h1>
           <Button asChild>
-            <Link to="/tienda">Volver a la tienda</Link>
+            <Link to="/tienda">Volver al catalogo</Link>
           </Button>
         </div>
       </Layout>
@@ -52,7 +52,7 @@ const ProductoDetalle = () => {
         <div className="container">
           <Link to="/tienda" className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary">
             <ArrowLeft className="h-4 w-4" />
-            Volver a la tienda
+            Volver al catalogo
           </Link>
 
           <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr]">
@@ -63,16 +63,47 @@ const ProductoDetalle = () => {
 
               <div className="grid gap-4 md:grid-cols-3">
                 <div className="rounded-lg border border-border bg-gradient-card p-4">
-                  <p className="text-xs uppercase tracking-[0.2em] text-primary">Aplicacion</p>
-                  <p className="mt-2 text-sm text-muted-foreground">{product.applications[0]}</p>
+                  <p className="text-xs uppercase tracking-[0.2em] text-primary">Linea</p>
+                  <p className="mt-2 text-sm text-muted-foreground">{product.line}</p>
                 </div>
                 <div className="rounded-lg border border-border bg-gradient-card p-4">
-                  <p className="text-xs uppercase tracking-[0.2em] text-primary">Sistema</p>
-                  <p className="mt-2 text-sm text-muted-foreground">{product.category}</p>
+                  <p className="text-xs uppercase tracking-[0.2em] text-primary">Fabricante base</p>
+                  <p className="mt-2 text-sm text-muted-foreground">{product.manufacturer}</p>
                 </div>
                 <div className="rounded-lg border border-border bg-gradient-card p-4">
-                  <p className="text-xs uppercase tracking-[0.2em] text-primary">Estado</p>
-                  <p className="mt-2 text-sm text-muted-foreground">Listo para presupuesto</p>
+                  <p className="text-xs uppercase tracking-[0.2em] text-primary">Marca comercial</p>
+                  <p className="mt-2 text-sm text-muted-foreground">{product.brand}</p>
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-300">Documentacion tecnica IDP</p>
+                    <h2 className="mt-3 text-2xl font-bold">Fichas preparadas para una presentacion profesional</h2>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      Esta referencia ya tiene la descarga técnica integrada en web. La siguiente fase quedará orientada a rehacer la ficha con identidad IDP: logo, nombre comercial, tipografía propia y acento verde.
+                    </p>
+                  </div>
+                  <FileText className="mt-1 h-8 w-8 shrink-0 text-emerald-300" />
+                </div>
+
+                <div className="mt-5 grid gap-3">
+                  {product.documents.map((document) => (
+                    <a
+                      key={document.href}
+                      href={document.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center justify-between rounded-lg border border-emerald-500/20 bg-background/50 px-4 py-3 transition-colors hover:border-emerald-400/50"
+                    >
+                      <div>
+                        <p className="font-medium text-foreground">{document.label}</p>
+                        <p className="text-xs text-muted-foreground">{document.format} · Marca IDP + base tecnica del fabricante</p>
+                      </div>
+                      <Download className="h-4 w-4 text-emerald-300" />
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>
@@ -80,7 +111,9 @@ const ProductoDetalle = () => {
             <div>
               <span className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">{product.category}</span>
               <h1 className="mt-2 text-3xl font-bold md:text-4xl">{product.name}</h1>
-              <p className="mt-4 text-4xl font-bold text-gradient-gold">{product.price.toFixed(2)} €</p>
+              <p className="mt-4 text-2xl font-bold text-gradient-gold">
+                {product.price !== undefined ? `${product.price.toFixed(2)} €` : "Presupuesto y ficha bajo consulta"}
+              </p>
               <p className="mt-6 leading-relaxed text-muted-foreground">{product.description}</p>
 
               <div className="mt-8 flex flex-wrap gap-2">
@@ -92,9 +125,9 @@ const ProductoDetalle = () => {
               </div>
 
               <div className="mt-8 rounded-lg border border-border bg-gradient-card p-5">
-                <p className="text-sm font-semibold">Prepara tu seleccion</p>
+                <p className="text-sm font-semibold">Prepara tu consulta</p>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Anade este producto a tu carrito para pedir presupuesto o asesoramiento personalizado.
+                  Anade esta referencia a tu seleccion para pedir presupuesto, soporte documental o asesoramiento tecnico personalizado.
                 </p>
                 <div className="mt-4 flex flex-wrap items-center gap-4">
                   <div className="flex items-center rounded-md border border-border">

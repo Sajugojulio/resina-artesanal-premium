@@ -6,7 +6,8 @@ import CartSheet from "./CartSheet";
 
 const navLinks = [
   { label: "Inicio", to: "/" },
-  { label: "Tienda", to: "/tienda" },
+  { label: "Catalogo", to: "/tienda" },
+  { label: "Fichas tecnicas", to: "/documentacion" },
   { label: "Soluciones", to: "/soluciones" },
   { label: "Nosotros", to: "/nosotros" },
   { label: "Contacto", to: "/contacto" },
