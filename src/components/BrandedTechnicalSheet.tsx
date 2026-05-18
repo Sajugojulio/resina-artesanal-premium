@@ -64,36 +64,41 @@ const renderTable = (rows: string[][], title: string) => {
   );
 };
 
-const BrandedTechnicalSheet = ({ product }: { product: Product }) => {
+const BrandedTechnicalSheet = ({ product, standalone = false }: { product: Product; standalone?: boolean }) => {
   const label = getProductLabelData(product);
   const sections = (technicalSheets as Record<string, SheetSection[]>)[product.slug] ?? [];
   const sourceDocument = product.documents[0];
+  const pdfHref = `${import.meta.env.BASE_URL}#/producto/${product.slug}/ficha-pdf`;
 
   return (
-    <section id="ficha-tecnica-idp" className="mt-20">
-      <div className="mb-8 flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300">Ficha tecnica IDP</p>
-          <h2 className="mt-3 text-3xl font-bold">Ficha fusionada con identidad visual propia</h2>
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-            Esta ficha ya integra la base técnica del fabricante dentro de una presentación IDP: cabecera de etiqueta, nombre comercial, línea, fabricante base y contenido técnico maquetado con el acento verde pedido por el cliente.
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-3">
-          {sourceDocument && (
+    <section id="ficha-tecnica-idp" className={standalone ? "" : "mt-20"}>
+      {!standalone && (
+        <div className="mb-8 flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300">Ficha tecnica IDP</p>
+            <h2 className="mt-3 text-3xl font-bold">Ficha fusionada con identidad visual propia</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+              Esta ficha ya integra la base técnica del fabricante dentro de una presentación IDP: cabecera de etiqueta, nombre comercial, línea, fabricante base y contenido técnico maquetado con el acento verde pedido por el cliente.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            {sourceDocument && (
+              <Button asChild variant="outline" className="border-emerald-400/30 text-emerald-200 hover:bg-emerald-500/10">
+                <a href={sourceDocument.href} target="_blank" rel="noreferrer">
+                  <Download className="mr-2 h-4 w-4" />
+                  Base original
+                </a>
+              </Button>
+            )}
             <Button asChild variant="outline" className="border-emerald-400/30 text-emerald-200 hover:bg-emerald-500/10">
-              <a href={sourceDocument.href} target="_blank" rel="noreferrer">
-                <Download className="mr-2 h-4 w-4" />
-                Base original
+              <a href={pdfHref} target="_blank" rel="noreferrer">
+                <Printer className="mr-2 h-4 w-4" />
+                Descargar PDF
               </a>
             </Button>
-          )}
-          <Button type="button" variant="outline" className="border-emerald-400/30 text-emerald-200 hover:bg-emerald-500/10" onClick={() => window.print()}>
-            <Printer className="mr-2 h-4 w-4" />
-            Imprimir ficha
-          </Button>
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="overflow-hidden rounded-[28px] border border-emerald-500/20 bg-white text-slate-900 shadow-[0_30px_80px_rgba(0,0,0,0.28)]">
         <div className="border-b border-emerald-900/10 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-600 px-8 py-8 text-white">
