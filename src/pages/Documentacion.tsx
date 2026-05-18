@@ -73,6 +73,16 @@ const Documentacion = () => {
                 </div>
 
                 <div className="mt-6 grid gap-3">
+                  <Link
+                    to={`/producto/${product.slug}#ficha-tecnica-idp`}
+                    className="flex items-center justify-between rounded-lg border border-emerald-500/20 bg-emerald-500/5 px-4 py-3 transition-colors hover:border-emerald-400/50"
+                  >
+                    <div>
+                      <p className="font-medium">Ver ficha tecnica IDP fusionada</p>
+                      <p className="text-xs text-muted-foreground">Version web unificada con cabecera y estilo IDP</p>
+                    </div>
+                    <FileText className="h-4 w-4 text-emerald-300" />
+                  </Link>
                   {product.documents.map((document) => (
                     <a
                       key={document.href}
@@ -82,8 +92,8 @@ const Documentacion = () => {
                       className="flex items-center justify-between rounded-lg border border-emerald-500/20 bg-emerald-500/5 px-4 py-3 transition-colors hover:border-emerald-400/50"
                     >
                       <div>
-                        <p className="font-medium">{document.label}</p>
-                        <p className="text-xs text-muted-foreground">{document.format} · Espanol</p>
+                        <p className="font-medium">Base tecnica original</p>
+                        <p className="text-xs text-muted-foreground">{document.format} · Documento fuente</p>
                       </div>
                       <Download className="h-4 w-4 text-emerald-300" />
                     </a>

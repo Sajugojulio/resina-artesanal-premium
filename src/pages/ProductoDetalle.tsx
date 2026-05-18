@@ -1,25 +1,25 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, CheckCircle, Download, FileText, Minus, Plus, ShoppingCart } from "lucide-react";
+import { ArrowLeft, CheckCircle, FileText, Minus, Plus, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import BrandedTechnicalSheet from "@/components/BrandedTechnicalSheet";
 import Layout from "@/components/Layout";
 import ProductCard from "@/components/ProductCard";
-import ProductLabelPreview from "@/components/ProductLabelPreview";
 import { products } from "@/data/products";
 import { useShop } from "@/context/ShopContext";
 
 const faqs = [
   {
-    q: "Puedo descargar ya la ficha tecnica?",
-    a: "Si. Cada referencia incluida en esta fase incorpora su documentacion tecnica para consulta y descarga directa.",
+    q: "La ficha ya esta fusionada con la identidad IDP?",
+    a: "Si. La ficha ya se presenta dentro de la propia web con cabecera, estructura y acento verde IDP sobre el contenido tecnico del fabricante.",
   },
   {
-    q: "Los nombres y fichas son definitivos?",
-    a: "La estructura ya esta preparada para crecer. Podemos ir anadiendo nuevas referencias, versiones o documentos sin rehacer la web.",
+    q: "Se pueden seguir anadiendo productos nuevos?",
+    a: "Si. La estructura ya esta preparada para crecer sin rehacer el formato de ficha tecnica fusionada.",
   },
   {
-    q: "Podeis personalizar la documentacion con identidad IDP?",
-    a: "Ese es precisamente el siguiente paso natural: maquetar las fichas con logo, tipografia y paleta verde de IDP.",
+    q: "Se conserva la base tecnica original?",
+    a: "Si. La base tecnica del fabricante se conserva y se presenta ya integrada bajo marca IDP.",
   },
 ];
 
@@ -80,35 +80,27 @@ const ProductoDetalle = () => {
               <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-6">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-300">Documentacion tecnica IDP</p>
-                    <h2 className="mt-3 text-2xl font-bold">Fichas preparadas para una presentacion profesional</h2>
+                    <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-300">Ficha tecnica fusionada</p>
+                    <h2 className="mt-3 text-2xl font-bold">La ficha y el boceto ya funcionan como una sola pieza</h2>
                     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                      Esta referencia ya tiene la descarga técnica integrada en web. La siguiente fase quedará orientada a rehacer la ficha con identidad IDP: logo, nombre comercial, tipografía propia y acento verde.
+                      Esta referencia ya no separa la etiqueta del contenido tecnico. La ficha completa se presenta con estructura IDP, cabecera propia, acento verde y base tecnica integrada en una sola pieza.
                     </p>
                   </div>
                   <FileText className="mt-1 h-8 w-8 shrink-0 text-emerald-300" />
                 </div>
 
                 <div className="mt-5 grid gap-3">
-                  {product.documents.map((document) => (
-                    <a
-                      key={document.href}
-                      href={document.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center justify-between rounded-lg border border-emerald-500/20 bg-background/50 px-4 py-3 transition-colors hover:border-emerald-400/50"
-                    >
-                      <div>
-                        <p className="font-medium text-foreground">{document.label}</p>
-                        <p className="text-xs text-muted-foreground">{document.format} · Marca IDP + base tecnica del fabricante</p>
-                      </div>
-                      <Download className="h-4 w-4 text-emerald-300" />
-                    </a>
-                  ))}
+                  <a
+                    href="#ficha-tecnica-idp"
+                    className="flex items-center justify-between rounded-lg border border-emerald-500/20 bg-background/50 px-4 py-3 transition-colors hover:border-emerald-400/50"
+                  >
+                    <div>
+                      <p className="font-medium text-foreground">Ver ficha tecnica IDP fusionada</p>
+                      <p className="text-xs text-muted-foreground">Etiqueta + contenido tecnico integrados en la misma ficha</p>
+                    </div>
+                  </a>
                 </div>
               </div>
-
-              <ProductLabelPreview product={product} />
             </div>
 
             <div>
@@ -203,6 +195,8 @@ const ProductoDetalle = () => {
               </div>
             </div>
           </div>
+
+          <BrandedTechnicalSheet product={product} />
 
           <div className="mx-auto mt-20 max-w-4xl">
             <h2 className="mb-8 text-center text-2xl font-bold">Preguntas frecuentes</h2>
