@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, CheckCircle, FileText, Minus, Plus, ShoppingCart } from "lucide-react";
+import { ArrowLeft, CheckCircle, Download, FileText, Minus, Plus, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import BrandedTechnicalSheet from "@/components/BrandedTechnicalSheet";
 import Layout from "@/components/Layout";
 import ProductCard from "@/components/ProductCard";
 import { products } from "@/data/products";
@@ -10,16 +9,16 @@ import { useShop } from "@/context/ShopContext";
 
 const faqs = [
   {
-    q: "La ficha ya esta fusionada con la identidad IDP?",
-    a: "Si. La ficha ya se presenta dentro de la propia web con cabecera, estructura y acento verde IDP sobre el contenido tecnico del fabricante.",
+    q: "La ficha tecnica se puede descargar en PDF?",
+    a: "Si. Cada producto dispone de una descarga en PDF con la ficha presentada bajo la identidad visual de IDP.",
   },
   {
     q: "Se pueden seguir anadiendo productos nuevos?",
-    a: "Si. La estructura ya esta preparada para crecer sin rehacer el formato de ficha tecnica fusionada.",
+    a: "Si. La estructura ya esta preparada para crecer sin rehacer el formato de documentacion de producto.",
   },
   {
-    q: "Se conserva la base tecnica original?",
-    a: "Si. La base tecnica del fabricante se conserva y se presenta ya integrada bajo marca IDP.",
+    q: "La documentacion sirve para presupuesto y apoyo tecnico?",
+    a: "Si. La descarga se plantea como apoyo comercial y tecnico para cliente, prescripcion y obra.",
   },
 ];
 
@@ -27,10 +26,6 @@ const ProductoDetalle = () => {
   const { slug } = useParams();
   const { addToCart } = useShop();
   const [quantity, setQuantity] = useState(1);
-
-  const scrollToSheet = () => {
-    document.getElementById("ficha-tecnica-idp")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
 
   const product = products.find((entry) => entry.slug === slug);
 
@@ -84,26 +79,25 @@ const ProductoDetalle = () => {
               <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-6">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-300">Ficha tecnica fusionada</p>
-                    <h2 className="mt-3 text-2xl font-bold">La ficha y el boceto ya funcionan como una sola pieza</h2>
+                    <p className="text-xs font-semibold uppercase tracking-[0.28em] text-emerald-300">Documentacion tecnica</p>
+                    <h2 className="mt-3 text-2xl font-bold">Descarga la ficha tecnica en PDF</h2>
                     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                      Esta referencia ya no separa la etiqueta del contenido tecnico. La ficha completa se presenta con estructura IDP, cabecera propia, acento verde y base tecnica integrada en una sola pieza.
+                      La documentacion del producto se entrega como PDF independiente, lista para consulta, envio a cliente o apoyo comercial.
                     </p>
                   </div>
                   <FileText className="mt-1 h-8 w-8 shrink-0 text-emerald-300" />
                 </div>
 
                 <div className="mt-5 grid gap-3">
-                  <button
-                    type="button"
-                    onClick={scrollToSheet}
-                    className="flex items-center justify-between rounded-lg border border-emerald-500/20 bg-background/50 px-4 py-3 transition-colors hover:border-emerald-400/50"
-                  >
-                    <div>
-                      <p className="font-medium text-foreground">Ver ficha tecnica IDP fusionada</p>
-                      <p className="text-xs text-muted-foreground">Etiqueta + contenido tecnico integrados en la misma ficha</p>
-                    </div>
-                  </button>
+                  <Button asChild size="lg" className="justify-between bg-emerald-600 text-white hover:bg-emerald-700">
+                    <Link to={`/producto/${product.slug}/ficha-pdf`} target="_blank" rel="noreferrer">
+                      <span className="flex items-center">
+                        <Download className="mr-2 h-5 w-5" />
+                        Descargar ficha tecnica PDF
+                      </span>
+                      <span className="text-xs uppercase tracking-[0.2em] text-emerald-100">PDF</span>
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -200,8 +194,6 @@ const ProductoDetalle = () => {
               </div>
             </div>
           </div>
-
-          <BrandedTechnicalSheet product={product} />
 
           <div className="mx-auto mt-20 max-w-4xl">
             <h2 className="mb-8 text-center text-2xl font-bold">Preguntas frecuentes</h2>
