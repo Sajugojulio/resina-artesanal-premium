@@ -1,4 +1,4 @@
-import { Download, FileBadge2, FileText, Palette } from "lucide-react";
+import { BookOpen, Download, FileBadge2, FileText, Palette, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/Layout";
@@ -6,6 +6,22 @@ import { products } from "@/data/products";
 
 const Documentacion = () => {
   const totalDocs = products.reduce((sum, product) => sum + product.documents.length, 0);
+  const catalogs = [
+    {
+      title: "Catalogo IDP de almohadillas de resina",
+      description: "Catalogo propio para presentar la linea de almohadillas de resina bajo identidad IDP.",
+      href: `${import.meta.env.BASE_URL}catalogs/almohadillas-resina-idp.pdf`,
+      badge: "Catalogo propio",
+      icon: FileBadge2,
+    },
+    {
+      title: "Catalogo Pentrilo 2026-2027",
+      description: "Catalogo de Pentrilo incorporado como material de distribuidor autorizado.",
+      href: `${import.meta.env.BASE_URL}catalogs/pentrilo-catalogo-2026-2027.pdf`,
+      badge: "Distribuidor autorizado",
+      icon: ShieldCheck,
+    },
+  ];
 
   return (
     <Layout>
@@ -35,6 +51,60 @@ const Documentacion = () => {
             <Palette className="h-8 w-8 text-emerald-300" />
             <p className="mt-4 text-3xl font-bold">IDP</p>
             <p className="mt-2 text-sm text-muted-foreground">Base lista para pasar a fichas con logo, tipografia y linea verde.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-border bg-background/40 py-14">
+        <div className="container">
+          <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Catalogos</span>
+              <h2 className="mt-3 text-3xl font-bold">Catalogos comerciales disponibles</h2>
+              <p className="mt-3 max-w-3xl text-muted-foreground">
+                Material descargable para consulta comercial, presentacion de producto y apoyo a clientes.
+              </p>
+            </div>
+            <div className="rounded-full border border-emerald-500/20 bg-emerald-500/5 px-4 py-2 text-sm text-emerald-300">
+              {catalogs.length} catalogos en PDF
+            </div>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            {catalogs.map((catalog) => {
+              const Icon = catalog.icon;
+
+              return (
+                <a
+                  key={catalog.href}
+                  href={catalog.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group rounded-xl border border-border bg-gradient-card p-6 transition-colors hover:border-emerald-400/50"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-start gap-4">
+                      <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 p-3 text-emerald-300">
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <span className="rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                          {catalog.badge}
+                        </span>
+                        <h3 className="mt-4 text-2xl font-bold">{catalog.title}</h3>
+                        <p className="mt-2 text-sm text-muted-foreground">{catalog.description}</p>
+                      </div>
+                    </div>
+                    <Download className="mt-1 h-5 w-5 shrink-0 text-emerald-300 transition-transform group-hover:translate-y-0.5" />
+                  </div>
+
+                  <div className="mt-6 flex items-center gap-2 text-sm font-medium text-primary">
+                    <BookOpen className="h-4 w-4" />
+                    Abrir PDF
+                  </div>
+                </a>
+              );
+            })}
           </div>
         </div>
       </section>
